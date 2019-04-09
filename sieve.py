@@ -17,18 +17,33 @@ col7=["7"]*9
 col8=["8"]*9
 col9=["9"]*9
 
-rows = ['A','B','C','D','E','F','G','H','I']
+#rows = ['A','B','C','D','E','F','G','H','I']
 digits='123456789'
-columns = ['1','2','3','4','5','6','7','8','9']
+#columns = ['1','2','3','4','5','6','7','8','9']
 
 #first goal, print squares.
 #dataframes and pandas? pandas is an extension, but look up what it is.
 
 #import the pandas library and aliasing as pd
-pip install pandas
-import pandas as pd
-df = pd.DataFrame()
-print (df)
+#python -m pip install -U pip setuptools
+
+def cross(A,B):
+    return (a+b for a in A for b in B)
+rows = 'ABCDEFGHI'
+columns = digits
+squares = cross(rows, columns)
+unitlist = ([cross (rows, c) for c in columns] + [cross(r, columns) for r in rows] + [cross(rs, cs) for rs in ('ABC', 'DEF', 'GHI') for cs in ('123','456','789')])
+
+units = dict((s, [u for u in unitlist if s in u]) for s in squares)
+peers = dict ((s, set(sum(units[s], []))-set([s]))for s in squares)
+
+print (peers)
+
+
+#maybe use dictionaries to store my lists
+#dict_name[new_key]=new_value
+
+#pip install pandas
 
 
 #this prints it straight
