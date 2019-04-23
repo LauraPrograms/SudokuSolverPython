@@ -26,18 +26,24 @@ digits='123456789'
 
 #import the pandas library and aliasing as pd
 #python -m pip install -U pip setuptools
-
+unitlist2 = []
 def cross(A,B):
-    return (a+b for a in A for b in B)
+    
+    for a in A:
+        for b in B:
+            unit = a+b  
+            unitlist2.append(unit)          
+    return(unitlist2) 
 rows = 'ABCDEFGHI'
 columns = digits
+
 squares = cross(rows, columns)
-unitlist = ([cross (rows, c) for c in columns] + [cross(r, columns) for r in rows] + [cross(rs, cs) for rs in ('ABC', 'DEF', 'GHI') for cs in ('123','456','789')])
+#unitlist = ([cross (rows, c) for c in columns] + [cross(r, columns) for r in rows] + [cross(rs, cs) for rs in ('ABC', 'DEF', 'GHI') for cs in ('123','456','789')])
 
-units = dict((s, [u for u in unitlist if s in u]) for s in squares)
-peers = dict ((s, set(sum(units[s], []))-set([s]))for s in squares)
+#units = dict((s, [u for u in unitlist if s in u]) for s in squares)
+#peers = dict ((s, set(sum(units[s], []))-set([s]))for s in squares)
 
-print (peers)
+print (squares)
 
 
 #maybe use dictionaries to store my lists
@@ -47,10 +53,10 @@ print (peers)
 
 
 #this prints it straight
-print (rows)
+#print (rows)
 
 #the code below prints out each elemnt in a new row
-for row in rows: print(row)
+#for row in rows: print(row)
 
 #loc gets rows(or colunms) with particular labels from the index
 #iloc gets rows (or columns0 at particular positions in the index - so it only takes integers
